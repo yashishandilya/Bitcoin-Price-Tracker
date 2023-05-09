@@ -23,8 +23,9 @@ function Home () {
   }
 
   return (
-      <div /* exercise 9.2 set classname to first box CSS*/>
-        <div /* exercise 9.2 set classname to second box CSS*/>
+    
+      <div className={styles.bodyContainer}>
+        <div className={styles.innerBodyContainer}>
           {chosen}
            {/* exercise 9.1 insert TestButton pass chosen and changeChosen ( pass by chosen={chosen})*/}
            <TestButton chosen={chosen} changeChosen={changeChosen}/>
