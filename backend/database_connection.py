@@ -1,3 +1,4 @@
+import sqlite3
 from sqlite3 import Error
 from constants import TABLE_NAME
 from bitcoin_timestamp import BitcoinTimestamp
@@ -59,18 +60,35 @@ class DatabaseConnection:
             output = []
             
             # TODO (5.3.1)
-            # get cursor
-            
-            
-            # insert sql query
-             
+            DATABASE_NAME = 'BitcoinDB-demo.db'
+            TABLE_NAME = 'Bitcoin'
 
-            # execute sql query
-           
+            # TODO: Connect to database
+            try: # always use a try-catch statement to prevent your programs from crashing in case of a failure
+                db = sqlite3.connect(DATABASE_NAME) 
+            except Error as e:
+                print(e)
 
-            # fetch all results obtained
-            
-            # close
+            # TODO: get cursor
+            cursor = db.cursor()
+
+            # TODO: define SQL query
+            sql = "SELECT * FROM '{}';".format(TABLE_NAME)
+
+            # TODO: execute sql query
+            cursor.execute(sql)
+
+            # TODO: fetch all results obtained
+            results = cursor.fetchall()
+            for x in results:
+                dbc = BitcoinTimestamp(x.results, price)
+
+            # TODO: close
+            cursor.close()
+
+            # TODO: print the results
+            print(results)
+
 
             # convert results to BitcoinTimestamp objects and append to output
 

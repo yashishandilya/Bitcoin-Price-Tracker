@@ -26,4 +26,5 @@ cursor.close()
 
 # TODO: print the results
 print(results)
+print(type(results[0]))
 
