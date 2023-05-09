@@ -80,14 +80,17 @@ class DatabaseConnection:
 
             # TODO: fetch all results obtained
             results = cursor.fetchall()
-            for x in results:
-                dbc = BitcoinTimestamp(x.results, price)
+            for listElement in results:
+                for tupleElement in listElement:
+                    dbc = BitcoinTimestamp(tupleElement[0], tupleElement[1])
+                    output.append(tupleElement[1])
 
             # TODO: close
             cursor.close()
 
             # TODO: print the results
             print(results)
+            print(output)
 
 
             # convert results to BitcoinTimestamp objects and append to output
