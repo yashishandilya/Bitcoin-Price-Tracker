@@ -23,7 +23,7 @@ function Home () {
   }
 
   return (
-    
+
       <div className={styles.bodyContainer}>
         <div className={styles.innerBodyContainer}>
           {chosen}
@@ -33,7 +33,6 @@ function Home () {
         </div>
       </div>
   );
-
 }
 
 export default Home;
