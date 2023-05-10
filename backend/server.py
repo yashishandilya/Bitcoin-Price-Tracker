@@ -25,6 +25,10 @@ app = FastAPI()
 # TODO (5.4.1): define database connection
 dBConnection = DatabaseConnection()
 
+CORS_URLS = [
+    "http://localhost",
+        "http://localhost:3000",
+]
 # TODO (3.2): add CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -51,23 +55,26 @@ repeated task to update bitcoin prices periodically
 
 def update_bitcoin_price(db:Session) -> None:
 
-    instanceBT = BitcoinTimestamp()
-    # instanceDBC = DatabaseConnection()
-    if (get_live_bitcoin_price() is None):
-       print("API call failed and get_live_bitcoin_price() function returned 0.0")
-    else:
 
+    print("Line 55")
+    # instanceDBC = DatabaseConnection()
+    if (get_live_bitcoin_price() > 0):
+        instanceBT = BitcoinTimestamp()
         instanceBT.price = get_live_bitcoin_price()  
         print(instanceBT.price)
         instanceBT.timestamp = convert_date_to_text(datetime.now())  
         print(instanceBT.timestamp)
         dBConnection.insert_timestamp(instanceBT)
+    else:
+        print("API call failed and get_live_bitcoin_price() function returned 0.0")
+    print("Line 65")
+
         
 @app.on_event("startup")
 @repeat_every(seconds=5)  # 5 minutes
 def update_bitcoin_price_task() -> None:
     with sessionmaker.context_session() as db:
-        update_bitcoin_price(db)
+        update_bitcoin_price(db=db)
 
 
 # TODO (5.4.3)
@@ -79,6 +86,12 @@ API endpoint to get bitcoin prices
 :rtype:
     json
 """
+dictList = []
+@app.get("/get_bitcoin_prices")
+async def get_bitcoin_prices():
+    for BTObj in dBConnection.get_all_timestampes():
+        dictList.append(vars(BTObj))
+    return json.dumps(dictList)
 
 
 # main function to run the server
