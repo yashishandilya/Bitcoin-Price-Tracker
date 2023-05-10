@@ -27,7 +27,7 @@ def get_live_bitcoin_price():
         # convert response body to JSON
         data = response.json()
         price = data['bpi']['USD']['rate'].replace(',','')
-        print('Bitcoin Price in USD' + data['bpi']['USD']['rate'])
+        print('Bitcoin Price in USD ' + data['bpi']['USD']['rate'])
         return float(price)
 
     # otherwise, print error code

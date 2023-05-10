@@ -65,18 +65,8 @@ class DatabaseConnection:
         try:
             output = []
             
-            # TODO (5.3.1)
-            DATABASE_NAME = 'BitcoinDB-demo.db'
-            TABLE_NAME = 'Bitcoin'
-
-            # TODO: Connect to database
-            try: # always use a try-catch statement to prevent your programs from crashing in case of a failure
-                db = sqlite3.connect(DATABASE_NAME) 
-            except Error as e:
-                print(e)
-
             # TODO: get cursor
-            cursor = db.cursor()
+            cursor = self.__db.cursor()
 
             # TODO: insert SQL query
             sql = "SELECT * FROM '{}';".format(TABLE_NAME)
@@ -87,15 +77,19 @@ class DatabaseConnection:
             # TODO: fetch all results obtained
             results = cursor.fetchall()
 
+            print("Printing from get_all_timsetamps:")
             # convert results to BitcoinTimestamp objects and append to output
             for listElement in results:
+                print("The timestamp is x and price is y", listElement[0], listElement[1])
                 dbc = BitcoinTimestamp(listElement[0], listElement[1])
+                print(dbc)
                 output.append(dbc)
 
             # TODO: close
             cursor.close()
 
             return output
+        
         except Error as e:
             print(e)
             return []
