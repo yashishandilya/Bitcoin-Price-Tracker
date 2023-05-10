@@ -13,7 +13,7 @@ from database_connection import DatabaseConnection
 app = FastAPI() 
 
 # TODO (5.4.1): define database connection
-
+dBConnection = DatabaseConnection()
 
 # TODO (3.2): add CORS middleware
 app.add_middleware(
