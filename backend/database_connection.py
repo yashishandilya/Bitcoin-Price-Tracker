@@ -35,7 +35,7 @@ class DatabaseConnection:
         try:
             # TODO (5.3.2)  
             # insert sql query
-            sql = f"INSERT * INTO TABLE_NAME (timestamp, price) VALUES (%s, %s)"
+            sql = f"INSERT * INTO TABLE_NAME (timestamp, price) VALUES (%s, %f)"
             VALUES = (bitcoin.timestamp, 0)
 
             # execute sql query

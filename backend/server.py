@@ -8,6 +8,16 @@ from constants import CORS_URLS
 from bitcoin_timestamp import BitcoinTimestamp
 from custom_util import get_live_bitcoin_price, convert_date_to_text
 from database_connection import DatabaseConnection
+from sqlalchemy.orm import Session
+
+from fastapi_utils.session import FastAPISessionMaker
+from fastapi_utils.tasks import repeat_every
+
+
+# /////question/////// iS THE URI OKAY? 
+# OR SHOULD WE CHANGE THE URI TO SOMETHING ELSE?
+database_uri = f"sqlite:///./test.db?check_same_thread=False"
+sessionmaker = FastAPISessionMaker(database_uri)
 
 # TODO (3.1): define FastAPI app
 app = FastAPI() 
@@ -30,15 +40,34 @@ a index function to test if server is running
 """
 @app.get("/")
 async def root():
-    content = {"message": "Hello World! This is a bitcoin monitoring servie!"}
+    content = {"message": "Hello World! This is a bitcoin monitoring service!"}
     return json.dumps(content)
-
 
 
 # TODO (5.4.2)
 """
 repeated task to update bitcoin prices periodically
 """
+
+def update_bitcoin_price(db:Session) -> None:
+
+    instanceBT = BitcoinTimestamp()
+    # instanceDBC = DatabaseConnection()
+    if (get_live_bitcoin_price() is None):
+       print("API call failed and get_live_bitcoin_price() function returned 0.0")
+    else:
+
+        instanceBT.price = get_live_bitcoin_price()  
+        print(instanceBT.price)
+        instanceBT.timestamp = convert_date_to_text(datetime.now())  
+        print(instanceBT.timestamp)
+        dBConnection.insert_timestamp(instanceBT)
+        
+@app.on_event("startup")
+@repeat_every(seconds=5)  # 5 minutes
+def update_bitcoin_price_task() -> None:
+    with sessionmaker.context_session() as db:
+        update_bitcoin_price(db)
 
 
 # TODO (5.4.3)
