@@ -41,6 +41,7 @@ class DatabaseConnection:
             # execute sql query
             cursor.execute(sql, VALUES)
 
+
             # commit to db
             self.__db.commit()
 
@@ -93,7 +94,7 @@ class DatabaseConnection:
 
             # TODO: close
             cursor.close()
-            
+
             return output
         except Error as e:
             print(e)

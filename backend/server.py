@@ -61,9 +61,9 @@ def update_bitcoin_price(db:Session) -> None:
     if (get_live_bitcoin_price() > 0):
         instanceBT = BitcoinTimestamp()
         instanceBT.price = get_live_bitcoin_price()  
-        print(instanceBT.price)
+        # print(instanceBT.price)
         instanceBT.timestamp = convert_date_to_text(datetime.now())  
-        print(instanceBT.timestamp)
+        # print(instanceBT.timestamp)
         dBConnection.insert_timestamp(instanceBT)
     else:
         print("API call failed and get_live_bitcoin_price() function returned 0.0")
@@ -86,9 +86,10 @@ API endpoint to get bitcoin prices
 :rtype:
     json
 """
-dictList = []
+
 @app.get("/get_bitcoin_prices")
 async def get_bitcoin_prices():
+    dictList = []
     for BTObj in dBConnection.get_all_timestampes():
         dictList.append(vars(BTObj))
     return json.dumps(dictList)
