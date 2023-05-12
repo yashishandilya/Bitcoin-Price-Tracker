@@ -7,7 +7,9 @@ import styles from "./Home.module.css"
 function Home () {
   // ToDo 10.3.1
   /* set variables (data, shown data, currency) using hooks (useState) */
-  
+  const [data, setData] = useState(0)
+  const [showData, setShowData] = useState(0)
+  const [chosenCurrency, setChosenCurrency] = useState('USD')
 
   // ToDo 10.3.2
   /* 
@@ -16,6 +18,10 @@ function Home () {
   Hint: with axios use .get(url of backend) .then(response =>{ do something with response}) refrence https://axios-http.com/docs/example
   */
   const updateData = () => {
+    axios.get("/bitcoin-prices").then((response) => {
+      setData(JSON.parse(response.data));
+      console.log(JSON.parse(response.data))
+    })
   }
   
   // update data on initialization (useEffect [], no dependencies)
@@ -28,6 +34,13 @@ function Home () {
   /* update data every 5 minutes (useEffect [data] as the dependency & setTimeout call updateData) 
     setTimeout refrence https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
   */
+
+  // right now, using 5 seconds for testing
+ useEffect(() => {
+  setTimeout(() => {
+    updateData();
+  }, 5)
+}, [data]);
 
 
   // ToDo 10.3.3
@@ -45,6 +58,20 @@ function Home () {
   currShowData.sort((a,b)=> {return(new Date(b.timestamp) - new Date(a.timestamp))})
   reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
   */
+ useEffect(() => {
+  let exchangeRate
+  if ( chosenCurrency === "USD") {
+    exchangeRate = 0.0122
+  } else {
+    exchangeRate = 82.24
+  }
+
+  let currShowData 
+  currShowData = currShowData.map(el => ({...el, price:parseFloat((el.price*exchangeRate).toFixed(4))}))
+  currShowData.sort((a,b)=> {return(new Date(b.timestamp) - new Date(a.timestamp))})
+
+  setShowData(currShowData)
+ }, [chosenCurrency, data])
   
   // ToDo 10.3.4
   /* 
@@ -56,16 +83,16 @@ function Home () {
     string
   */
   const changeCurrency = (currency) =>{
+    setChosenCurrency(currency)
   }
 
   // ToDo 10.3.5
   // call CurrencyButton and TimeCurrencyCard pass the variables
   return (
     <div className={styles.buttonContainer}>
-      {currency}
        {/* exercise 9.1 insert TestButton pass chosen and changeChosen ( pass by chosen={chosen})*/}
-       <CurrencyButton currency={currency} changeCurrency={changeCurrency}/>
-      {message}
+       <CurrencyButton currency={chosenCurrency} changeCurrency={changeCurrency}/>
+       <TimeCurrencyCard currency={chosenCurrency} showData={showData} />
   </div>
   );
 
