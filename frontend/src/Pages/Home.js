@@ -61,8 +61,12 @@ function Home () {
   // ToDo 10.3.5
   // call CurrencyButton and TimeCurrencyCard pass the variables
   return (
-      <>
-      </>
+    <div className={styles.buttonContainer}>
+      {currency}
+       {/* exercise 9.1 insert TestButton pass chosen and changeChosen ( pass by chosen={chosen})*/}
+       <CurrencyButton currency={currency} changeCurrency={changeCurrency}/>
+      {message}
+  </div>
   );
 
 }

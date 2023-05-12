@@ -2,12 +2,15 @@
 }
 
 .priceContainerUp {
+    font:#11d469;
 }
 
 .priceContainerDown {
+    font:#b02727;
 }
 
 .priceContainerEqual {
+    font:#1f86db;
 }
 
 .timeContainer {

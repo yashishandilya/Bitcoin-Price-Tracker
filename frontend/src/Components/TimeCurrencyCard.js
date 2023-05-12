@@ -11,7 +11,7 @@ import styles from "./TimeCurrencyCard.module.css"
 :type:
     list[{dict}]
 */
-function TimeCurrencyCard ({currency,showData}) {
+function TimeCurrencyCard ({currency, showData}) {
     // ToDo 10.2.1
     /* 
     set price text color
@@ -25,6 +25,21 @@ function TimeCurrencyCard ({currency,showData}) {
         CSS  Object
     */
     const priceColor = (index) => {
+        if (index === 0) {
+            // First data point, no previous price to compare
+            return '';
+        }
+        
+        const currentPrice = showData[index].price;
+        const previousPrice = showData[index - 1].price;
+    
+        if (currentPrice < previousPrice) {
+        return styles.priceContainerDown;
+        } else if (currentPrice > previousPrice) {
+        return styles.priceContainerUp;
+        } else {
+        return styles.priceContainerEqual;
+        }
     }
 
     // ToDo 10.2.2
@@ -40,6 +55,22 @@ function TimeCurrencyCard ({currency,showData}) {
         string
     */
     const arrowSign = (index) => {
+        if (index === 0) {
+            // First data point, no previous price to compare
+            return '';
+        }
+        
+        const currentPrice = showData[index].price;
+        const previousPrice = showData[index - 1].price;
+    
+        if (currentPrice < previousPrice) {
+        return "↓";
+        } else if (currentPrice > previousPrice) {
+        return "↑";
+        } else {
+        return '-';
+        }
+
     }
     
     // ToDo 10.2.3
@@ -47,10 +78,17 @@ function TimeCurrencyCard ({currency,showData}) {
         <>
         {/* reference for .map https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map */}
             {showData.map((d, index) => (
-                <>
-                {/* use {currency === 'USD' ? "$" : *other currency sign*} to set the currency notation  
+                <div className={priceColor(index)} key={index}>
+                <div className={styles.timeContainer}></div>
+                {/* use {currency === 'USD' ? "$" : "₹"} to set the currency notation  
                 reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator */}
-                </>
+                <div className={priceColor(index)}>
+                    {currency === "USD" ? "$" : "₹"}
+                    {d.price.toFixed(5)}
+                </div>
+                <div className={arrowSign(index)}>{arrowSign(index)}
+                </div>
+            </div>
             ))} 
         </>      
     );
