@@ -25,6 +25,7 @@ function TimeCurrencyCard ({currency, showData}) {
         CSS  Object
     */
     const priceColor = (index) => {
+
         if (index === 0) {
             // First data point, no previous price to compare
             return '';
@@ -78,7 +79,7 @@ function TimeCurrencyCard ({currency, showData}) {
         <>
         {/* reference for .map https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map */}
             {showData.map((d, index) => (
-                <div className={priceColor(index)} key={index}>
+                <div className={styles.cardContainer} key={index}>
                 <div className={styles.timeContainer}>
                     {d.timestamp}
                 </div>
@@ -86,7 +87,7 @@ function TimeCurrencyCard ({currency, showData}) {
                 reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator */}
                 <div className={priceColor(index)}>
                     {currency === "USD" ? "$" : "₹"}
-                    {d.price.toFixed(5)}
+                    {d.price.toFixed(5)} 
                 </div>
                 <div className={priceColor(index)}>
                     {arrowSign(index)}

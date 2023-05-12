@@ -7,7 +7,7 @@ import styles from "./Home.module.css"
 function Home () {
   // ToDo 10.3.1
   /* set variables (data, shown data, currency) using hooks (useState) */
-  const [data, setData] = useState(0)
+  const [data, setData] = useState([])
   const [showData, setShowData] = useState(0)
   const [chosenCurrency, setChosenCurrency] = useState('USD')
 
@@ -18,10 +18,14 @@ function Home () {
   Hint: with axios use .get(url of backend) .then(response =>{ do something with response}) refrence https://axios-http.com/docs/example
   */
   const updateData = () => {
-    axios.get("/bitcoin-prices").then((response) => {
+    axios.get("/get_bitcoin_prices").then((response) => {
       setData(JSON.parse(response.data));
       console.log(JSON.parse(response.data))
     })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
   }
   
   // update data on initialization (useEffect [], no dependencies)
@@ -35,7 +39,7 @@ function Home () {
     setTimeout refrence https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
   */
 
-  // right now, using 5 seconds for testing
+  ///////// right now, using 5 seconds for testing
  useEffect(() => {
   setTimeout(() => {
     updateData();
@@ -66,7 +70,7 @@ function Home () {
     exchangeRate = 82.24
   }
 
-  let currShowData 
+  let currShowData = data
   currShowData = currShowData.map(el => ({...el, price:parseFloat((el.price*exchangeRate).toFixed(4))}))
   currShowData.sort((a,b)=> {return(new Date(b.timestamp) - new Date(a.timestamp))})
 
