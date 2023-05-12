@@ -79,14 +79,17 @@ function TimeCurrencyCard ({currency, showData}) {
         {/* reference for .map https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map */}
             {showData.map((d, index) => (
                 <div className={priceColor(index)} key={index}>
-                <div className={styles.timeContainer}></div>
+                <div className={styles.timeContainer}>
+                    {d.timestamp}
+                </div>
                 {/* use {currency === 'USD' ? "$" : "₹"} to set the currency notation  
                 reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator */}
                 <div className={priceColor(index)}>
                     {currency === "USD" ? "$" : "₹"}
                     {d.price.toFixed(5)}
                 </div>
-                <div className={arrowSign(index)}>{arrowSign(index)}
+                <div className={priceColor(index)}>
+                    {arrowSign(index)}
                 </div>
             </div>
             ))} 
