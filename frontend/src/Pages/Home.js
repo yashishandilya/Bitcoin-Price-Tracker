@@ -18,14 +18,14 @@ function Home () {
   Hint: with axios use .get(url of backend) .then(response =>{ do something with response}) refrence https://axios-http.com/docs/example
   */
   const updateData = () => {
-    axios.get("http://localhost:8000/bitcoin_prices").then ( function (response) {
+    axios.get("http://localhost:8000/get_bitcoin_prices").then ((response) => {
       setData(JSON.parse(response.data))
       console.log(JSON.parse(response.data))
     })
-    .catch(function (error) {
-      // handle error
-      console.log(error)
-    })
+    // .catch(function (error) {
+    //   // handle error
+    //   console.log(error)
+    // })
   }
   
   // update data on initialization (useEffect [], no dependencies)
@@ -43,7 +43,7 @@ function Home () {
  useEffect(() => {
   setTimeout(() => {
     updateData()
-  }, 15)
+  }, 300000)
 }, [data])
 
 

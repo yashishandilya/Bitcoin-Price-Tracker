@@ -27,7 +27,7 @@ dBConnection = DatabaseConnection()
 
 CORS_URLS = [
     "http://localhost",
-    "http://localhost:3000"
+    "http://localhost:8000"
 ]
 
 # TODO (3.2): add CORS middleware

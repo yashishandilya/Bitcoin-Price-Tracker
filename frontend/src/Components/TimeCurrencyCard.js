@@ -26,23 +26,23 @@ function TimeCurrencyCard ({currency, showData}) {
     */
     const priceColor = (index) => {
         var currentPrice = showData[index].price;
-        var previousPrice;
+        var previousPrice = showData[index - 1].price;
 
         if (index === 0) {
             // First data point, no previous price to compare
-            previousPrice = 0;
-        }
-        else {
-            previousPrice = showData[index - 1].price;
+            return styles.priceContainerEqual;
         }
     
-        if (currentPrice < previousPrice) {
-        return styles.priceContainerDown;
-        } else if (currentPrice > previousPrice) {
-        return styles.priceContainerUp;
-        } else {
-        return styles.priceContainerEqual;
+        else if (index > 0) {
+            if (currentPrice < previousPrice) {
+                return styles.priceContainerDown;
+                } else if (currentPrice > previousPrice) {
+                return styles.priceContainerUp;
+                } else {
+                return styles.priceContainerEqual;
+                }
         }
+
     }
 
     // ToDo 10.2.2
@@ -63,14 +63,10 @@ function TimeCurrencyCard ({currency, showData}) {
 
         if (index === 0) {
             // First data point, no previous price to compare
-            previousPrice = 0;
+            return '-';
         }
-        else {
-            previousPrice = showData[index - 1].price;
-        }
-        
 
-    
+            
         if (currentPrice < previousPrice) {
         return "↓";
         } else if (currentPrice > previousPrice) {
@@ -81,7 +77,7 @@ function TimeCurrencyCard ({currency, showData}) {
 
     }
     console.log(showData);
-    
+
     // ToDo 10.2.3
     return (
         <div style={{ padding: "24px", display: "flex", flexWrap: "wrap" }}>
