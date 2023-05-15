@@ -1,20 +1,26 @@
 .cardContainer {
-    background-color: rgba(0,0,0,0.3);
-    padding: 12px;
-    margin: 4px;
+    border-radius: 20px;
+    background-color: #B6D0E2;
+    padding: 50px;
+    margin: 10px;
+    box-shadow: 5px 5px #798b97;
 }
 
 .priceContainerUp {
-    color: green;
+    color: rgb(21, 185, 21);
+    font-weight: bold;
 }
 
 .priceContainerDown {
-    color: red;
+    color: #fa4d4d;
+    font-weight: bold;
 }
 
 .priceContainerEqual {
-    color: white;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .timeContainer {
+    color:rgb(52, 26, 202)
 }

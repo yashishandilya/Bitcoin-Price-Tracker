@@ -80,7 +80,7 @@ function TimeCurrencyCard({ currency, showData }) {
                 <div className={styles.cardContainer} key={index}>
                     {/* use {currency === 'USD' ? "$" : *other currency sign*} to set the currency notation  
                 reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator */}
-                    <p className={priceColor(index)}>{currency === 'USD' ? "$" : "€"} {d.price}{arrowSign(index)}</p>
+                    <p className={priceColor(index)}>{currency === 'USD' ? "$" : "₹"} {d.price}{arrowSign(index)}</p>
                     <p>{d.timestamp}</p>
                 </div>
             ))}

@@ -3,12 +3,14 @@
     justify-content: center;
     align-items: center;
     margin-top: 24px;
+    padding-inline: 20px;
+    /* background-color: #8ec1e6; */
 }
 
 .currencyButtonActive {
     font-size: 16px;
-    background-color: #1d1d1d;
-    color: #bfd6ff;
+    background-color: #565266;
+    color: #d2b3d6;
     border-radius: 8px;
     padding: 8px;
     border: 0;
@@ -17,8 +19,9 @@
 
 .currencyButtonDefault {
     font-size: 16px;
-    background-color: transparent;
+    background-color:  #4381C1;
+    color: #89bff5;
     border-radius: 8px;
     padding: 8px;
-    border: 0;
+    border: 0px;
 }
