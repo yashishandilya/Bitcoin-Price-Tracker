@@ -11,8 +11,8 @@ import styles from "./TimeCurrencyCard.module.css"
 :type:
     list[{dict}]
 */
-function TimeCurrencyCard ({currency, showData}) {
-    // ToDo 10.2.1
+function TimeCurrencyCard({ currency, showData }) {
+    // ToDo 10.2.1 
     /* 
     set price text color
     :index:
@@ -25,24 +25,21 @@ function TimeCurrencyCard ({currency, showData}) {
         CSS  Object
     */
     const priceColor = (index) => {
-        var currentPrice = showData[index].price;
-        var previousPrice = showData[index - 1].price;
-
+        // index is 0
         if (index === 0) {
-            // First data point, no previous price to compare
             return styles.priceContainerEqual;
         }
-    
+        // index > 0
         else if (index > 0) {
-            if (currentPrice < previousPrice) {
+            if (showData[index - 1].price > showData[index].price) {
                 return styles.priceContainerDown;
-                } else if (currentPrice > previousPrice) {
+            }
+            else if (showData[index - 1].price < showData[index].price) {
                 return styles.priceContainerUp;
-                } else {
+            } else {
                 return styles.priceContainerEqual;
-                }
+            }
         }
-
     }
 
     // ToDo 10.2.2
@@ -58,26 +55,23 @@ function TimeCurrencyCard ({currency, showData}) {
         string
     */
     const arrowSign = (index) => {
-        var currentPrice = showData[index].price;
-        var previousPrice;
-
         if (index === 0) {
-            // First data point, no previous price to compare
             return '-';
         }
-
-            
-        if (currentPrice < previousPrice) {
-        return "↓";
-        } else if (currentPrice > previousPrice) {
-        return "↑";
-        } else {
-        return '-';
+        // index > 0
+        else if (index > 0) {
+            if (showData[index - 1].price > showData[index].price) {
+                return "↓";
+            }
+            else if (showData[index - 1].price < showData[index].price) {
+                return "↑";
+            } else {
+                return '-';
+            }
         }
-
     }
-    console.log(showData);
 
+    console.log(showData);
     // ToDo 10.2.3
     return (
         <div style={{ padding: "24px", display: "flex", flexWrap: "wrap" }}>

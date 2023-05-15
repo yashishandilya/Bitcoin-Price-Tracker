@@ -22,10 +22,6 @@ function Home () {
       setData(JSON.parse(response.data))
       console.log(JSON.parse(response.data))
     })
-    // .catch(function (error) {
-    //   // handle error
-    //   console.log(error)
-    // })
   }
   
   // update data on initialization (useEffect [], no dependencies)
@@ -65,11 +61,9 @@ function Home () {
  useEffect(() => {
   let currShowData = data
 
-  let exchangeRate = 1
+  let exchangeRate = 82.24
   if ( currency === "USD") {
     exchangeRate = 0.0122
-  } else {
-    exchangeRate = 82.24
   }
 
 
@@ -102,7 +96,6 @@ function Home () {
        <TimeCurrencyCard timeCurrency={currency} showData={showData} />
   </div>
   );
-
 }
 
 export default Home;
