@@ -19,6 +19,7 @@
 .priceContainerEqual {
     color: rgb(255, 255, 255);
     font-weight: bold;
+    font: #ddf567;
 }
 
 .timeContainer {

@@ -76,6 +76,10 @@ def update_bitcoin_price(db:Session) -> None:
     else:
         print("API call failed and get_live_bitcoin_price() function returned 0.0")
     print("Line 65")
+    print("Line 65")
+    print("Line 65")
+    print("Line 65")
+
 
         
 
