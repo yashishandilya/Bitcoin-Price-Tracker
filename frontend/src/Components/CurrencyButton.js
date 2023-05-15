@@ -11,6 +11,7 @@ import styles from "./CurrencyButton.module.css"
   function
 */
 function CurrencyButton ({currency,changeCurrency}) {
+  console.log("Currency button function called")
   // ToDo 10.1
   return (
     <div className={styles.buttonContainer}>
@@ -24,7 +25,6 @@ function CurrencyButton ({currency,changeCurrency}) {
         </button>
     </div>      
   );
-
 }
 
 export default CurrencyButton;

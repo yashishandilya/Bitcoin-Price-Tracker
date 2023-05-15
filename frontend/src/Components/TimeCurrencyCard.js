@@ -25,14 +25,16 @@ function TimeCurrencyCard ({currency, showData}) {
         CSS  Object
     */
     const priceColor = (index) => {
+        var currentPrice = showData[index].price;
+        var previousPrice;
 
         if (index === 0) {
             // First data point, no previous price to compare
-            return '';
+            previousPrice = 0;
         }
-        
-        const currentPrice = showData[index].price;
-        const previousPrice = showData[index - 1].price;
+        else {
+            previousPrice = showData[index - 1].price;
+        }
     
         if (currentPrice < previousPrice) {
         return styles.priceContainerDown;
@@ -56,13 +58,18 @@ function TimeCurrencyCard ({currency, showData}) {
         string
     */
     const arrowSign = (index) => {
+        var currentPrice = showData[index].price;
+        var previousPrice;
+
         if (index === 0) {
             // First data point, no previous price to compare
-            return '';
+            previousPrice = 0;
+        }
+        else {
+            previousPrice = showData[index - 1].price;
         }
         
-        const currentPrice = showData[index].price;
-        const previousPrice = showData[index - 1].price;
+
     
         if (currentPrice < previousPrice) {
         return "↓";
@@ -73,28 +80,21 @@ function TimeCurrencyCard ({currency, showData}) {
         }
 
     }
+    console.log(showData);
     
     // ToDo 10.2.3
     return (
-        <>
-        {/* reference for .map https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map */}
+        <div style={{ padding: "24px", display: "flex", flexWrap: "wrap" }}>
+            {/* reference for .map https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map */}
             {showData.map((d, index) => (
                 <div className={styles.cardContainer} key={index}>
-                <div className={styles.timeContainer}>
-                    {d.timestamp}
-                </div>
-                {/* use {currency === 'USD' ? "$" : "₹"} to set the currency notation  
+                    {/* use {currency === 'USD' ? "$" : *other currency sign*} to set the currency notation  
                 reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator */}
-                <div className={priceColor(index)}>
-                    {currency === "USD" ? "$" : "₹"}
-                    {d.price.toFixed(5)} 
+                    <p className={priceColor(index)}>{currency === 'USD' ? "$" : "€"} {d.price}{arrowSign(index)}</p>
+                    <p>{d.timestamp}</p>
                 </div>
-                <div className={priceColor(index)}>
-                    {arrowSign(index)}
-                </div>
-            </div>
-            ))} 
-        </>      
+            ))}
+        </div>
     );
 
 }

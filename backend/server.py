@@ -89,7 +89,7 @@ API endpoint to get bitcoin prices
     json
 """
 
-@app.get("/get_bitcoin_prices")
+@app.get("http://localhost:8000/get_bitcoin_prices")
 async def get_bitcoin_prices():
     dictList = []
     print("Line 95")
