@@ -3,3 +3,73 @@
 
 .bodyContainerMargin{
 }
+
+.toggleButton {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  border-color: #45857d;
+  border-radius: 7px;
+  background-color: #9bbab6;
+  padding: 10px;
+}
+
+.chatboxContainer {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 10px;
+}
+  
+.chatbox {
+  background-color: #45857d;
+  padding: 10px;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #b1c4c2;
+  border-color: #366661;
+  inset: 10px;
+}
+
+/* Add this CSS to your Home.module.css file */
+.collapsed {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 0.3s, opacity 0.3s;
+}
+
+
+.refreshButton {
+  background-color: #9bbab6;
+  border-color: #45857d;
+  border-radius: 7px;
+  margin-right: 20px;
+}
+
+.collapseButton {
+  background-color: #9bbab6;
+  border-color: #45857d;
+  border-radius: 7px;
+  margin-right: 10px;
+}
+
+.sendButton {
+  background-color: #9bbab6;
+  border-color: #45857d;
+  border-radius: 7px;
+}
+
+.conversationContainer {
+  background-color: #fbffc6;
+  border-radius: 7px;
+  margin-block: 10px;
+}
+
+.promptField {
+  background-color: #fbfdea;
+  border-radius: 5px;
+}
+
+.message {
+  font: #ffffff;
+}

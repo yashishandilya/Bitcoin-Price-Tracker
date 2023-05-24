@@ -9,7 +9,7 @@ from bitcoin_timestamp import BitcoinTimestamp
 from custom_util import get_live_bitcoin_price, convert_date_to_text
 from database_connection import DatabaseConnection
 from sqlalchemy.orm import Session
-
+import openai
 from fastapi_utils.session import FastAPISessionMaker
 from fastapi_utils.tasks import repeat_every
 
@@ -81,9 +81,6 @@ def update_bitcoin_price(db:Session) -> None:
     print("Line 65")
 
 
-        
-
-
 # TODO (5.4.3)
 """
 API endpoint to get bitcoin prices
@@ -103,6 +100,24 @@ async def get_bitcoin_prices():
         # print(BTObj)
     return json.dumps(dictList)
 
+openai.api_key = "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"
+messages = [{"role": "system", "content": "Hello World"}]
+
+def CustomChatGPT(user_input):
+    messages.append({"role": "user", "content": user_input})
+    response = openai.Completion.create(
+        engine="davinci-codex",
+        prompt_messages=messages,
+        max_tokens=100,
+        n=1,
+        stop=None,
+        temperature=0.7,
+    )
+    ChatGPT_reply = response.choices[0].message.content
+    messages.append({"role": "assistant", "content": ChatGPT_reply})
+    return ChatGPT_reply
+
+app.add_api_route("/api/chatgpt", CustomChatGPT)
 
 # main function to run the server
 if __name__ == '__main__':
