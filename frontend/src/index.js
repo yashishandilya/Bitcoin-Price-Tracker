@@ -46,9 +46,9 @@ async function main() {
   // const widget = await markerSDK.loadWidget({ project: '646645b18e0917e2d5f47501' });
   // Rest of your code here
 
-  const rootChatBox = document.createElement('div');
-  rootChatBox.id = 'rootChatBox';
-  root.appendChild(rootChatBox);
+  // const rootChatBox = document.createElement('div');
+  // rootChatBox.id = 'rootChatBox';
+  // root.appendChild(rootChatBox);
 
   ReactDOM.render(
     <React.StrictMode>

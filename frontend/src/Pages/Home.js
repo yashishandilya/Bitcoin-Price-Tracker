@@ -98,11 +98,14 @@
 // //   );
 // // }
 
+///////////////////////////////////////////////////////////////////////////////////
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CurrencyButton from "../Components/CurrencyButton";
 import TimeCurrencyCard from "../Components/TimeCurrencyCard";
 import styles from "./Home.module.css";
+import FloatingButton from "../Components/FloatingButton";
 
 // Update the API key with your own OpenAI API key
 const OPENAI_API_KEY = "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";
@@ -115,6 +118,7 @@ function Home() {
   const [chatboxCollapsed, setChatboxCollapsed] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [conversation, setConversation] = useState([]);
+  // const [toggleChatbox, setToggle] = useState(false)
 
   const updateData = () => {
     axios.get("http://localhost:8000/get_bitcoin_prices").then((response) => {
@@ -158,28 +162,23 @@ function Home() {
 
   const toggleChatboxCollapse = () => {
     setChatboxCollapsed(!chatboxCollapsed);
-    if (!chatboxCollapsed && !chatboxVisible) {
+    if (!chatboxVisible) {
       setChatboxVisible(true);
     }
   };
   
   const toggleChatbox = () => {
-    if (!chatboxVisible) {
-      setChatboxVisible(true);
-    } else {
-      setChatboxCollapsed(!chatboxCollapsed);
-    }
+    setChatboxVisible(!chatboxVisible);
   };
+
+  // const openChatbox = () => {
+  //   setChatboxVisible(!chatboxVisible);
+  // };
 
   const handlePromptChange = (e) => {
     setPrompt(e.target.value);
   };
 
-  // const handleSend = () => {
-  //   // Handle sending prompt logic here
-  //   console.log("Prompt:", prompt);
-  //   setPrompt("");
-  // };
 
   const handleSend = () => {
     if (prompt.trim() === "") {
@@ -263,15 +262,21 @@ function Home() {
         )}
 
         {/* Insert chatbox toggle button at the bottom right */}
-        <div className={styles.toggleButtonContainer}>
+        {/* <div className={styles.toggleButtonContainer}>
           <button
             className={`${styles.toggleButton} ${chatboxVisible ? styles.active : ""}`}
             onClick={toggleChatbox}
           >
             Chat with ChatGPT
           </button>
-        </div>
+        </div> */}
 
+
+      {/* Insert floating button */}
+        <div className={styles.toggleButtonContainer}>
+          <FloatingButton toggleChatbox={toggleChatbox} />
+        </div>
+        
         <CurrencyButton currency={currency} changeCurrency={changeCurrency} />
         <TimeCurrencyCard timeCurrency={currency} showData={showData} />
       </div>
